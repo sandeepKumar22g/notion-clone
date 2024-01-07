@@ -13,6 +13,7 @@ import { toast } from 'sonner'
 import DocumentList from './documentList'
 
 import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover"
+import TrashBox from './TrashBox'
 
 const Navigation = () => {
     const pathname = usePathname()
@@ -132,7 +133,7 @@ const Navigation = () => {
                     <Item label='Trash' icon={Trash}  />
                 </PopoverTrigger>
                 <PopoverContent side={isMobile ? "bottom" : "right"} className='p-0 w-72' >
-                    <p>Trash box</p>
+                    <TrashBox />
                 </PopoverContent>
                </Popover>
             </div>
