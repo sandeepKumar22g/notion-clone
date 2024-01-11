@@ -21,7 +21,11 @@ const Navbar = ({ isCollapse, onResetWidth }: NavbarProps) => {
     const document = useQuery(api.documents.getById, {documentId: params.documentId as Id<"documents">})
 
     if(document === undefined){
-        return <p>Loading...</p>
+        return (
+            <nav className='bg-background dark:bg-[#1F1F1F] px-3 py-2 w-full flex items-center gap-x-4'>
+                <Title.Skelton />
+            </nav>
+        )
     }
 
     if(document === null){
