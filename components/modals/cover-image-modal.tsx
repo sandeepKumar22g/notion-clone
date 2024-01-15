@@ -9,6 +9,7 @@ import { useMutation } from 'convex/react';
 import { api } from '@/convex/_generated/api';
 import { useParams } from 'next/navigation';
 import { Id } from '@/convex/_generated/dataModel';
+import { url } from 'inspector';
 
 
 const CoverImageModal = () => {
@@ -33,9 +34,9 @@ const CoverImageModal = () => {
       setFile(file);
 
       const res = await edgestore.publicFiles.upload({
-        file
+          file, options: {replaceTargetUrl: coverImage.url}
       })
-
+     
       await update({
         id: params.documentId as Id<"documents">,
         coverImage: res.url
