@@ -9,6 +9,7 @@ import { useMutation } from 'convex/react';
 import { api } from '@/convex/_generated/api';
 import { useParams } from 'next/navigation';
 import { Id } from '@/convex/_generated/dataModel';
+import { useEdgeStore } from '@/lib/edgestore';
 
 interface CoverImageProp{
     url?: string;
@@ -19,9 +20,16 @@ const Cover = ({preview, url}: CoverImageProp) => {
     const coverImage = useCoverImage()
     const removeCoverImage = useMutation(api.documents.removeCoverImage);
 
+    const {edgestore} = useEdgeStore()
+
     const params = useParams()
     
-    const onRemove = () =>{
+    const onRemove = async () =>{
+        if(url){
+            await edgestore.publicFiles.delete({
+                url: url
+            })
+        }
         removeCoverImage({
             id: params.documentId as Id<"documents">
         })
